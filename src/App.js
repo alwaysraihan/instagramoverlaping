@@ -1,6 +1,7 @@
 // import Influencer1 from "zgodofficial8003followers.json";
 
 import { useEffect, useState } from "react";
+import Home from "./Pages/Home";
 
 // import Influencer2 from "hastarbtc8008followers.json";
 function App() {
@@ -40,13 +41,13 @@ function App() {
     const intersection = infu1.filter((element) => infu2.includes(element));
 
     return (
-        <div>
-            <h1>User List</h1>
-            {intersection.map((user, index) => (
+        <div className="bg-gray-50 min-h-screen">
+            {/* {intersection.map((user, index) => (
                 <div key={index}>
                     <h1>{user}</h1>
                 </div>
-            ))}
+            ))} */}
+            <Home />
         </div>
     );
 }
