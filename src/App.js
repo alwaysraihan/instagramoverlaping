@@ -27,27 +27,27 @@ function App() {
     Influencer2.forEach((activity) => {
         data2.push(activity);
     });
-    const infu1 = [];
-    const infu2 = [];
+    const infuencerData1 = [];
+    const infuencerData2 = [];
     data1.map((user) => {
-        return infu1.push(user.username);
+        return infuencerData1.push(user.username);
     });
-    // console.log(infu1);
-    data2.map((user) => {
-        return infu2.push(user.username);
-    });
-    // console.log(infu2);
 
-    const intersection = infu1.filter((element) => infu2.includes(element));
+    data2.map((user) => {
+        return infuencerData2.push(user.username);
+    });
+
+    const overlpaingUser = infuencerData1.filter((element) =>
+        infuencerData2.includes(element)
+    );
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            {/* {intersection.map((user, index) => (
-                <div key={index}>
-                    <h1>{user}</h1>
-                </div>
-            ))} */}
-            <Home />
+            <Home
+                overlpaingUser={overlpaingUser}
+                Followers1={infuencerData1}
+                Followers2={infuencerData2}
+            />
         </div>
     );
 }
