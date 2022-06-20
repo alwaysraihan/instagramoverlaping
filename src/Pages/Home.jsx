@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import FollowersModal from "../components/FollowersModal";
 import OverlappingFollowers from "../components/OverlappingFollowers";
+import AbishekImg from "../assets/images/Abishek.jpg";
+import GopalImg from "../assets/images/Gopal Sarda.jpg";
 
 const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
     const [followersModal, setFollowersModal] = useState(null);
     return (
         <>
             <div className="px-[10%] py-10 ">
+                <h1 className="text-center text-3xl font-bold text-info mb-8">
+                    Influencer Information
+                </h1>
                 {/* home top  */}
                 <div className="grid grid-cols-2 gap-8">
                     <div className="flex justify-between items-center p-10 bg-white rounded-lg shadow-lg">
                         <div>
                             <img
-                                className="h-64 w-64"
-                                src="https://influcracy.com/static/media/shruti.c1356eef.png"
+                                className="h-64 w-64 rounded-full"
+                                src={AbishekImg}
                                 alt="profile"
                             />
                         </div>
@@ -44,8 +49,8 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                     <div className="flex justify-between items-center p-10 bg-white rounded-lg shadow-lg">
                         <div>
                             <img
-                                className="h-64 w-64"
-                                src="https://influcracy.com/static/media/shruti.c1356eef.png"
+                                className="h-64 w-64 rounded-full"
+                                src={GopalImg}
                                 alt="profile"
                             />
                         </div>
@@ -74,8 +79,8 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                     </div>
                 </div>
             </div>
-            <OverlappingFollowers overlpaingUser={overlpaingUser} />
-            {followersModal && <FollowersModal data={followersModal} />}
+            {/* <OverlappingFollowers overlpaingUser={overlpaingUser} /> */}
+            {followersModal && <FollowersModal Followers={followersModal} />}
         </>
     );
 };
