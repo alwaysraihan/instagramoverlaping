@@ -3,6 +3,8 @@ import FollowersModal from "../components/FollowersModal";
 import OverlappingFollowers from "../components/OverlappingFollowers";
 import AbishekImg from "../assets/images/Abishek.jpg";
 import GopalImg from "../assets/images/Gopal Sarda.jpg";
+import Signup from "./Signup";
+import Login from "./Login";
 
 const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
     const [followersModal, setFollowersModal] = useState(null);
@@ -78,6 +80,8 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                         </div>
                     </div>
                 </div>
+                <Signup />
+                <Login />
             </div>
             {/* <OverlappingFollowers overlpaingUser={overlpaingUser} /> */}
             {followersModal && <FollowersModal Followers={followersModal} />}
