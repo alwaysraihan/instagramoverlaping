@@ -12,7 +12,7 @@ const Header = () => {
     return (
         <div className="bg-black py-5 flex justify-between items-center px-[5%] md:px-[10%]">
             <h1 className="text-center text-white text-xl font-semibold uppercase">
-                influcerrcy
+                influcracy
             </h1>
             {user ? (
                 <div className="relative antialiased -order-1 lg:order-1">

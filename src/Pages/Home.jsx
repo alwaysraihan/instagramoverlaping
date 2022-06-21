@@ -17,6 +17,7 @@ import {
 } from "recharts";
 const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
     const [followersModal, setFollowersModal] = useState(null);
+    const [overlappingModal, setOverlappinModal] = useState(null);
     const [charData, setChartData] = useState([]);
     const getChartData = async () => {
         const respnose = await fetch("chartData.json");
@@ -55,9 +56,25 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                         </div>
                         <div>
                             <h1 className="text-center mb-3">Information</h1>
-                            <h1>username: zgodofficial</h1>
+                            <h1>
+                                username:{" "}
+                                <a
+                                    href="https://www.instagram.com/zgodofficial/?hl=en"
+                                    target="__blank"
+                                >
+                                    zgodofficial
+                                </a>
+                            </h1>
 
-                            <h1>Name: 𝑨𝒃𝒉𝒊𝒔𝒉𝒆𝒌 𝑪𝒉𝒐𝒖𝒅𝒉𝒂𝒓𝒚</h1>
+                            <h1>
+                                Name:{" "}
+                                <a
+                                    href="https://www.instagram.com/zgodofficial/?hl=en"
+                                    target="__blank"
+                                >
+                                    𝑨𝒃𝒉𝒊𝒔𝒉𝒆𝒌 𝑪𝒉𝒐𝒖𝒅𝒉𝒂𝒓𝒚
+                                </a>
+                            </h1>
                             <h1>Category: Gamer</h1>
 
                             <h1>359K followers</h1>
@@ -87,12 +104,25 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                         </div>
                         <div>
                             <h1 className="text-center mb-3">Information</h1>
-                            <h1>username: hastarbtc</h1>
+                            <h1>
+                                username:{" "}
+                                <a
+                                    href="https://www.instagram.com/hastarbtc/?hl=en"
+                                    target="__blank"
+                                >
+                                    hastarbtc
+                                </a>
+                            </h1>
                             <h1>
                                 Name:{" "}
-                                <span className="font-semibold">
-                                    Gopal Sarda
-                                </span>
+                                <a
+                                    href="https://www.instagram.com/hastarbtc/?hl=en"
+                                    target="__blank"
+                                >
+                                    <span className="font-semibold">
+                                        Gopal Sarda
+                                    </span>
+                                </a>
                             </h1>
                             <h1>Category: Gamer</h1>
 
@@ -115,11 +145,7 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                     </div>
                 </div>
 
-                {followersModal && (
-                    <FollowersModal Followers={followersModal} />
-                )}
-
-                <div className="md:flex mt-10  justify-between items-center p-2 md:p-4 xl:p-8 2xl:p-10 bg-white rounded-lg shadow-xl">
+                <div className="lg:flex mt-10  justify-between items-center p-2 md:p-4 xl:p-8 2xl:p-10 bg-white rounded-lg shadow-xl">
                     <div className="w-full py-5 px-2 lg:py-0 lg:px-0 lg:w-[50%] md:px-4 leading-6 font-semibold text-gray-600 xl:px-8 ">
                         <h1 className="mb-5 text-center md:text-xl font-semibold">
                             𝑨𝒃𝒉𝒊𝒔𝒉𝒆𝒌 𝑪𝒉𝒐𝒖𝒅𝒉𝒂𝒓𝒚{" "}
@@ -132,8 +158,23 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                             followers here is 16011 And {overlpaingUser.length}{" "}
                             total overlapping users were found.
                         </h1>
+
+                        <div className="flex justify-center mt-5 ">
+                            <button
+                                onClick={() =>
+                                    setOverlappinModal(overlpaingUser)
+                                }
+                            >
+                                <label
+                                    for="overlappingModal"
+                                    class="btn btn-info  text-white modal-button"
+                                >
+                                    See Overlapping Audience
+                                </label>
+                            </button>
+                        </div>
                     </div>
-                    <div className="w-full lg:w-[50%] h-full ">
+                    <div className="w-full lg:w-[50%] h-full flex justify-center items-center ">
                         <ResponsiveContainer width="100%" height={400}>
                             <BarChart data={data}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -148,7 +189,10 @@ const Home = ({ overlpaingUser, Followers1, Followers2 }) => {
                     </div>
                 </div>
             </div>
-            {/* <OverlappingFollowers overlpaingUser={overlpaingUser} /> */}
+            {followersModal && <FollowersModal Followers={followersModal} />}
+            {overlappingModal && (
+                <OverlappingFollowers overlpaingUser={overlappingModal} />
+            )}
         </>
     );
 };
