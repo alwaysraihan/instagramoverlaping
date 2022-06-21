@@ -10,7 +10,7 @@ const Header = () => {
         signOut(auth);
     };
     return (
-        <div className="bg-black py-5 flex justify-between items-center px-[5%]">
+        <div className="bg-black py-5 flex justify-between items-center px-[5%] md:px-[10%]">
             <h1 className="text-center text-white text-xl font-semibold uppercase">
                 influcerrcy
             </h1>
@@ -19,13 +19,13 @@ const Header = () => {
                     <div className=" group cursor-pointer relative ">
                         {user.photoURL ? (
                             <img
-                                className="w-10 h-10 rounded-full"
+                                className="w-14 h-14 rounded-full"
                                 src={user.photoURL}
                                 alt="profile"
                             />
                         ) : (
                             <img
-                                className="w-10 h-10 rounded-full"
+                                className="w-14 h-14 rounded-full"
                                 src="https://i.ibb.co/KDfw63R/Pngtree-business-male-icon-vector-4187852.png"
                                 alt="profile"
                             />

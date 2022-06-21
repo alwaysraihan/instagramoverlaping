@@ -50,8 +50,10 @@ function App() {
 
     return (
         <>
-            <Header />
-            <div className="bg-gray-100 min-h-[80vh]">
+            <div className="sticky top-0">
+                <Header />
+            </div>
+            <div className="bg-gray-100 min-h-[85vh] overflow-y-scroll">
                 <Routes>
                     <Route
                         path="/"
