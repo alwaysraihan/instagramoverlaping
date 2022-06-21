@@ -1,7 +1,11 @@
 // import Influencer1 from "zgodofficial8003followers.json";
 
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 
 // import Influencer2 from "hastarbtc8008followers.json";
 function App() {
@@ -43,11 +47,18 @@ function App() {
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            <Home
-                overlpaingUser={overlpaingUser}
-                Followers1={infuencerData1}
-                Followers2={infuencerData2}
-            />
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <RequireAuth>
+                            <Home />
+                        </RequireAuth>
+                    }
+                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+            </Routes>
         </div>
     );
 }
