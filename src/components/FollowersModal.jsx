@@ -13,9 +13,9 @@ const FollowersModal = ({ Followers }) => {
                     >
                         ✕
                     </label>
-                    <h3 class="text-lg font-bold mb-5">Followers List</h3>
+                    <h3 class="md:text-lg font-bold mb-5">Followers List</h3>
                     <div class="overflow-x-auto">
-                        <table class="table w-full">
+                        <table class="table w-full overflow-x-auto">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -28,7 +28,14 @@ const FollowersModal = ({ Followers }) => {
                                 {Followers.map((follower, index) => (
                                     <tr key={index}>
                                         <th>{index + 1}.</th>
-                                        <td>{follower.slice(0, 19)}</td>
+                                        <td>
+                                            <span className="hidden md:block">
+                                                {follower.slice(0, 19)}
+                                            </span>
+                                            <span className=" md:hidden">
+                                                {follower.slice(0, 5)}..
+                                            </span>
+                                        </td>
                                         <td>
                                             <button class="btn btn-xs btn-info">
                                                 <a

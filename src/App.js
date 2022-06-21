@@ -6,7 +6,8 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import Influencer2 from "hastarbtc8008followers.json";
 function App() {
     const [Influencer1, setInfluencer1] = useState([]);
@@ -46,19 +47,24 @@ function App() {
     );
 
     return (
-        <div className="bg-gray-50 min-h-screen">
+        <div className="bg-gray-100 min-h-screen">
             <Routes>
                 <Route
                     path="/"
                     element={
                         <RequireAuth>
-                            <Home />
+                            <Home
+                                overlpaingUser={overlpaingUser}
+                                Followers1={infuencerData1}
+                                Followers2={infuencerData2}
+                            />
                         </RequireAuth>
                     }
                 />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
             </Routes>
+            <ToastContainer />
         </div>
     );
 }

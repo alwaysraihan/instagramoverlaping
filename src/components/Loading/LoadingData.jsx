@@ -3,7 +3,7 @@ import React from "react";
 const LoadingData = () => {
     return (
         <>
-            <div class="w-full flex items-center flex-col">
+            <div class="w-full flex items-center flex-col py-5 md:py-8 lg:py-10">
                 <div class="flex bg-white shadow-md p-4 rounded-md">
                     <div
                         data-placeholder

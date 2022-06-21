@@ -34,31 +34,40 @@ const Signup = () => {
         e.preventDefault();
     };
 
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [updateProfile, updateError] = useUpdateProfile(auth);
     if (user || user1) {
         navigate(from, { replace: true });
     }
 
     if (loading || loading1) {
-        return (
-            <div className="my-5">
-                <LoadingData></LoadingData>
-            </div>
-        );
+        return <LoadingData />;
     }
     if (error || updateError || error1) {
-        errorText = ` Error: {error?.message}
-                {updateError?.message}`;
+        errorText = ` Error: ${error?.message}
+               ${error1?.message} ${updateError?.message}`;
     }
     if (errorText) {
-        toast.error(errorText);
+        toast.error(errorText, {
+            toastId: "loginAvailyerror",
+        });
     }
+    const handleRegister = async (event) => {
+        event.preventDefault();
+        const { name, email, password } = userLoginData;
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+    };
+    const handleLoginUnavailable = () => {
+        toast.error("Soory ! only google available.", {
+            toastId: "loginAvailyerror",
+        });
+    };
 
     return (
         <>
-            <div className="px-[10%] bg-gray-50 ">
-                <div class="mt-0 transition-all duration-200 ease-soft-in-out">
-                    <section class="min-h-screen mb-32 p-4">
+            <div className="md:px-[10%] ">
+                <div class="mt-0 transition-all  py-2 md:py-0 px-1 md:px-0 duration-200 ease-soft-in-out">
+                    <section class="min-h-screen mb-32 md:p-4">
                         <div
                             class="relative flex items-start pt-12 pb-56  overflow-hidden bg-center bg-cover min-h-50-screen rounded-xl bg-black"
                             // style="background-image: url('../assets/img/curved-images/curved14.jpg')"
@@ -87,9 +96,11 @@ const Signup = () => {
                                         </div>
                                         <div class="flex flex-wrap px-3 -mx-3 sm:px-6 xl:px-12">
                                             <div class="w-3/12 max-w-full px-1 ml-auto flex-0">
-                                                <a
+                                                <sapn
                                                     class="inline-block w-full px-6 py-3 mb-4 font-bold text-center text-gray-200 uppercase align-middle transition-all bg-transparent border border-gray-200 border-solid rounded-lg shadow-none cursor-pointer hover:scale-102 leading-pro text-size-xs ease-soft-in tracking-tight-soft bg-150 bg-x-25 hover:bg-transparent hover:opacity-75"
-                                                    href="/"
+                                                    onClick={
+                                                        handleLoginUnavailable
+                                                    }
                                                 >
                                                     <svg
                                                         width="24px"
@@ -122,12 +133,14 @@ const Signup = () => {
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                </a>
+                                                </sapn>
                                             </div>
                                             <div class="w-3/12 max-w-full px-1 flex-0">
-                                                <a
+                                                <span
                                                     class="inline-block w-full px-6 py-3 mb-4 font-bold text-center text-gray-200 uppercase align-middle transition-all bg-transparent border border-gray-200 border-solid rounded-lg shadow-none cursor-pointer hover:scale-102 leading-pro text-size-xs ease-soft-in tracking-tight-soft bg-150 bg-x-25 hover:bg-transparent hover:opacity-75"
-                                                    href="/"
+                                                    onClick={
+                                                        handleLoginUnavailable
+                                                    }
                                                 >
                                                     <svg
                                                         width="24px"
@@ -152,12 +165,15 @@ const Signup = () => {
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                </a>
+                                                </span>
                                             </div>
                                             <div class="w-3/12 max-w-full px-1 mr-auto flex-0">
-                                                <a
+                                                <span
                                                     class="inline-block w-full px-6 py-3 mb-4 font-bold text-center text-gray-200 uppercase align-middle transition-all bg-transparent border border-gray-200 border-solid rounded-lg shadow-none cursor-pointer hover:scale-102 leading-pro text-size-xs ease-soft-in tracking-tight-soft bg-150 bg-x-25 hover:bg-transparent hover:opacity-75"
-                                                    href="/"
+                                                    type="button"
+                                                    onClick={() => {
+                                                        signInWithGoogle();
+                                                    }}
                                                 >
                                                     <svg
                                                         width="24px"
@@ -196,7 +212,7 @@ const Signup = () => {
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                </a>
+                                                </span>
                                             </div>
                                             <div class="relative w-full max-w-full px-3 mt-2 text-center shrink-0">
                                                 <p class="z-20 inline px-4 mb-2 font-semibold leading-normal bg-white text-size-sm text-slate-400">
@@ -205,12 +221,22 @@ const Signup = () => {
                                             </div>
                                         </div>
                                         <div class="flex-auto p-6">
-                                            <form className="form text-left">
+                                            <form
+                                                onSubmit={handleRegister}
+                                                className="form text-left"
+                                            >
                                                 <div class="mb-4">
                                                     <input
                                                         type="text"
-                                                        class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                                        placeholder="Name"
+                                                        id="name"
+                                                        name="name"
+                                                        value={
+                                                            userLoginData.name
+                                                        }
+                                                        placeholder="Your name"
+                                                        onChange={getUserData}
+                                                        required
+                                                        className="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
                                                         aria-label="Name"
                                                         aria-describedby="email-addon"
                                                     />
@@ -218,8 +244,15 @@ const Signup = () => {
                                                 <div class="mb-4">
                                                     <input
                                                         type="email"
-                                                        class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                                        placeholder="Email"
+                                                        id="email"
+                                                        name="email"
+                                                        value={
+                                                            userLoginData.email
+                                                        }
+                                                        placeholder="email address"
+                                                        onChange={getUserData}
+                                                        required
+                                                        className="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
                                                         aria-label="Email"
                                                         aria-describedby="email-addon"
                                                     />
@@ -227,8 +260,15 @@ const Signup = () => {
                                                 <div class="mb-4">
                                                     <input
                                                         type="password"
-                                                        class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                                        placeholder="Password"
+                                                        name="password"
+                                                        value={
+                                                            userLoginData.password
+                                                        }
+                                                        id="password"
+                                                        placeholder="password"
+                                                        onChange={getUserData}
+                                                        required
+                                                        className="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
                                                         aria-label="Password"
                                                         aria-describedby="password-addon"
                                                     />
@@ -254,7 +294,7 @@ const Signup = () => {
                                                 </div>
                                                 <div class="text-center">
                                                     <button
-                                                        type="button"
+                                                        type="submit"
                                                         class="inline-block disabled w-full px-6 py-3 mt-6 mb-2 font-bold text-center  uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-size-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-slate-800 text-white hover:border-slate-700 hover:bg-slate-700 hover:text-white"
                                                     >
                                                         Sign up
